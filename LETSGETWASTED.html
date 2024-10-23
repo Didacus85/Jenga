@@ -101,6 +101,16 @@ h3 {
 	max-width: 95%;
 }
 
+.videoAzione{
+	width: auto;
+  height: 60vmin;
+  display: flex;
+  position: relative;
+	margin-left :auto;
+	margin-right :auto;
+	max-width: 95%;
+}
+
 .imgAzioneLandscape{
 	width: auto;
   height: 40vmin;
@@ -415,16 +425,178 @@ input:checked + label:after {
 	z-index: 3;
 }
 
+#videoAzioneDiv {
+	z-index: 3;
+}
+
+.contornoNome {
+	color: red; /* Colore del testo */
+  text-shadow: 
+  	-1px -2px 0 #fff,
+    1px -1px 0 #fff,
+    -1px  1px 0 #fff,
+    1px  1px 0 #fff;
+
+}
+
+.contornoNeroStrong {
+	color: white; /* Colore del testo */
+  text-shadow: 
+  	-2px -4px 0 #000,
+    1px -1px 0 #000,
+    -1px  1px 0 #000,
+    1px  1px 0 #000;
+}
+
+.contornoNero {
+	color: white; /* Colore del testo */
+  text-shadow: 
+  	-2px -2px 0 #000,
+    1px -1px 0 #000,
+    -1px  1px 0 #000,
+    1px  1px 0 #000;
+}
+
+.contornoBianco {
+  text-shadow: 
+  	-1px -1px 0 #b0b0b0,
+    1px -1px 0 #b0b0b0,
+    -1px  1px 0 #b0b0b0,
+    1px  1px 0 #b0b0b0;
+    
+}
+
+.contafatti {
+	color: red;
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 24px;
+  padding: 10px;
+}
+
+.blinking-text {
+  font-size: 48px;
+  color: red;
+  font-weight: bold;
+  text-align: center;
+  text-shadow: 
+  	-2px -2px 0 #000,
+    1px -1px 0 #000,
+    -1px  1px 0 #000,
+    1px  1px 0 #000;
+  animation: blink-animation 1s infinite; /* Animazione */
+}
+
+/* Definisci l'animazione per il lampeggiamento */
+@keyframes blink-animation {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.nascondi {
+  display: none;
+}
+
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    bottom: 0;
+    left: -150px; /* Nasconde la sidebar fuori schermo */
+    width: 150px;
+    height: 50%;
+    background-color: #333;
+    color: white;
+    transition: left 0.3s ease;
+    padding: 0px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    font-size: 24px;
+    z-index: 3;
+    
+}
+
+.sidebar.open {
+    left: 0; /* Mostra la sidebar */
+}
+
+/* Contenuto della sidebar */
+.sidebar h2 {
+    margin-top: 0;
+}
+
+/* Pulsante di apertura */
+.toggle-btn {
+    position: fixed;
+    bottom: 10px;
+    left: 15px;
+    z-index: 3;
+    background-color: transparent;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.gear-btn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 3;
+}
+
+.gear-icon {
+    width: 50px;
+    height: 50px;
+    fill: #333; /* Colore dell'ingranaggio */
+    transition: transform 0.3s ease;
+    z-index: 3;
+    filter: drop-shadow(0 0 0.75rem white);
+}
+
+.gear-btn:hover .gear-icon {
+    transform: rotate(180deg); /* Rotazione al passaggio del mouse */
+}
+
+.sideButton{
+	color: white;
+	font-family: 'Bangers', regular;
+	background-color: #333;
+	font-size: 24px;
+	filter: drop-shadow(0 0 1mm white);
+}
+
+.lightShadow{
+	filter: drop-shadow(0 0 1mm white);
+}
+
 </style>
 <body id="corpo" oncontextmenu="return false;">
 
   <div id="testoAzione" class="">
-
-	<h1 id="cat-azione-Sel">LETS GET WASTEEEED!!!</h1>
-	<h2 id="azione-Sel"></h2>
-	<h3 id="regole"></h3>
+	
+	<div id="conta-fatti" class="contafatti contornoNero"></div>
+	
+	<h1 id="cat-azione-Sel" class="contornoNeroStrong" >LETS GET WASTEEEED!!!</h1>
+	<h2 id="azione-Sel" class="contornoNero" ></h2>
+	<h3 id="regole" class="contornoNero" ></h3>
   <div id="imgAzioneDiv">
   	<img class="imgAzione boximg" id="img-Sel" src="" ondblclick="openOverlay()">
+	</div>
+	<div id="videoAzioneDiv">
+  	<video class="videoAzione boximg" id="video-Sel" onclick="" ondblclick="">
+        <source id="video-Sel-src" src="" type="video/mp4">
+    </video>
 	</div>
 	<div id="overlay" onclick="closeOverlay()">
   	<img class="" id="img-Sel-over" src="">
@@ -432,9 +604,9 @@ input:checked + label:after {
   <div id="overlayNonSelezionabile">
   </div>
 
-	<div id="audio-button" class="ballAudio audiobtn">
+	<!--div id="audio-button" class="ballAudio audiobtn">
       <span id="comandiaudio">PAUSE AUDIO</span>
-  </div>
+  </div-->
 	<div id="sceltaGioco-button" class="ball">
       <span id="sceltaGioco">DAI CAZZO</span>
   </div>
@@ -442,8 +614,19 @@ input:checked + label:after {
       <span id="countdown">PRESS & HOLD</span>
   </div>
   
+<div class="blinking-text" id="resumeNewgame">RESUME GAME</div>
 
-<div id="switches" class="switches">
+<div id="switches" class="switches contornoBianco">
+		<div id="div-ck-new-game">
+				<input id="ck-new-game" name="ck-new-game" type="checkbox" />
+				<label for="ck-new-game"></label>
+				RESUME / NEW GAME
+		<br>
+		<br>
+		<br>
+		</div>
+		
+		<div id="divSceltaGioco">
 		<div>
 				<input id="ck-language-ita" name="ck-language" value="ITA" type="radio" hidden checked />
 				&nbsp;&nbsp;&nbsp;<label for="ck-language-ita"></label>
@@ -457,9 +640,8 @@ input:checked + label:after {
 		</div>
 		<br>
 		<br>
-		<br>
 		<div>
-				<input id="ck-actions" name="ck-actions" type="checkbox" checked />
+				<input id="ck-actions" name="ck-actions" type="checkbox"  />
 				<label for="ck-actions"></label>
 				Actions
 		</div>
@@ -471,26 +653,40 @@ input:checked + label:after {
 		<br>
 		</div>
 		<div>
-				<input id="ck-cards" name="ck-cards" type="checkbox" checked />
+				<input id="ck-cards" name="ck-cards" type="checkbox"  />
 				<label for="ck-cards"></label>
 				Cards
 		</div>
 		<br>
 			<div>
-					<input id="ck-hot" name="ck-hot" type="checkbox" checked />
+					<input id="ck-hot" name="ck-hot" type="checkbox"  />
 					<label for="ck-hot"></label>
 					Hot
 			</div>
 		<br>
+		<div id="div-ck-new">
+				<input id="ck-new" name="ck-new" type="checkbox"  />
+				<label for="ck-new"></label>
+				New
+		</div>
+		<br>
+		<div id="div-ck-nomerandom">
+				<input id="ck-nomerandom" name="ck-nomerandom" type="checkbox"  />
+				<label for="ck-nomerandom"></label>
+				Nome Random
 		<br>
 		<br>
+		<br>
+		</div>
+		</div>
+
 		<div>
-				<input id="ck-countdown" name="ck-countdown" type="checkbox" checked />
+				<input id="ck-countdown" name="ck-countdown" type="checkbox"  />
 				<label for="ck-countdown"></label>
 				Countdown
 		</div>
 		<br>
-		<div>
+		<div id="div-ck-audio">
 				<input id="ck-audio" name="ck-audio" type="checkbox" checked />
 				<label for="ck-audio"></label>
 				Audio
@@ -505,6 +701,22 @@ input:checked + label:after {
 
 </div><!--testoAzione-->
 	
+<!-- Pulsante di apertura -->
+<button class="gear-btn toggle-btn" id="toggleBtn">
+    <svg class="gear-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M12 8.5A3.5 3.5 0 1 1 8.5 12 3.5 3.5 0 0 1 12 8.5M19.43 12.97a7.32 7.32 0 0 0 .07-1 7.32 7.32 0 0 0-.07-1l2.11-1.65a.5.5 0 0 0 .12-.63l-2-3.46a.5.5 0 0 0-.61-.22l-2.49 1a7.05 7.05 0 0 0-1.73-1L14.5 2.5a.5.5 0 0 0-.5-.5h-4a.5.5 0 0 0-.5.5l-.38 2.53a7.05 7.05 0 0 0-1.73 1l-2.49-1a.5.5 0 0 0-.61.22l-2 3.46a.5.5 0 0 0 .12.63L4.57 10a7.32 7.32 0 0 0-.07 1 7.32 7.32 0 0 0 .07 1L2.46 13.7a.5.5 0 0 0-.12.63l2 3.46a.5.5 0 0 0 .61.22l2.49-1a7.05 7.05 0 0 0 1.73 1l.38 2.53a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5l.38-2.53a7.05 7.05 0 0 0 1.73-1l2.49 1a.5.5 0 0 0 .61-.22l2-3.46a.5.5 0 0 0-.12-.63Z"/>
+    </svg>
+</button>
+
+<!-- Sidebar -->
+<div class="sidebar contornoNero" id="sidebar">
+    
+    <p></P>
+    <button class="sideButton contornoNero" id="sideNome" onClick="shufflePlayer()">SHUFFLE NOME</button>
+    <p></P>
+    <button class="sideButton contornoNero" id="sideAudio">AUDIO ON OFF</button>
+</div>
+
 <script>
 
 const apiKey = 'AIzaSyAM3dcFBIVc8DCwYSrfVWj0uAAUc2Xqxdo';
@@ -515,11 +727,17 @@ var azioniPassate = new Array();
 var audioArray = new Array();
 var audioArrayPassate = new Array();
 var audioArrayRandom = new Array();
+var playerArrayRandom = new Array();
+var playerArrayPassate = new Array();
 
 var rand = 0;
 var randAudio = 0;
+var randPlayer = 0;
 var presente = 1;
 var presenteAudio = 1;
+var presentePlayer = 1;
+var nContaFatti = 0;
+var numNomiRandom = 0;
 
 var rVect = [];
 var rGame = '';
@@ -527,7 +745,9 @@ var rCateg = '';
 var rValue = '';
 var rImg = '';
 var rSound = '';
+var rVideo = '';
 var rVectAudioRandom = [];
+var rVectPlayerRandom = [];
 
 window.addEventListener('beforeunload', function (e) {
 
@@ -617,6 +837,34 @@ window.addEventListener('beforeunload', function (e) {
           console.error('Errore nella lettura dei dati:', error);
         });
     }
+    
+    function loadGoogleSheetPlayer() {
+      // Sostituisci con la tua chiave di API e ID del foglio di calcolo
+      //const apiKey = 'AIzaSyAM3dcFBIVc8DCwYSrfVWj0uAAUc2Xqxdo';
+      //const sheetId = '1mpDaPQYDQbfTpigGCI6jHS38re7UKIjobeq6BLs1-w8';
+
+      // URL per accedere ai dati del Google Sheet
+      const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/Players?key=${apiKey}`;
+				
+      // Effettua una richiesta GET per ottenere i dati
+      fetch(url)
+        .then(response => response.json())
+        .then(data => {
+
+          // Estrai i dati e crea elementi della lista
+          data.values.forEach(row => {
+            
+            playerArrayRandom.push(row);
+            //console.log(playerArrayRandom);
+            //console.log(playerArrayRandom.length);
+
+          });
+          //prepareAudio();
+        })
+        .catch(error => {
+          console.error('Errore nella lettura dei dati:', error);
+        });
+    }
 
   	
 		function generateRandomColor() {
@@ -632,8 +880,10 @@ window.addEventListener('beforeunload', function (e) {
 			
 			rand = 0;
 			randAudio = 0;
+			randPlayer = 0;
 			presente = 1;
 			presenteAudio = 1;
+			presentePlayer = 1;
 
 			while(presente==1){
 				rand = Math.floor(Math.random()*azioni.length);
@@ -662,9 +912,73 @@ window.addEventListener('beforeunload', function (e) {
 			rValue = rVect[3];
 			rImg = rVect[4];
 			rSound = rVect[5];
+			rVideo = rVect[6];
 			//console.log(rCateg);
 			//console.log(rValue);
 
+		}
+		
+		function shufflePlayer(){
+			playerArrayPassate.splice(-numNomiRandom);
+			if(playerArrayPassate.length == playerArrayRandom.length -1){
+					let halfLength = Math.floor(playerArrayPassate.length / 2);
+					// Rimuovi la prima metà degli elementi
+					playerArrayPassate.splice(0, halfLength);
+					console.log(playerArrayPassate);
+			}
+			
+			var frase;
+			console.log(rValue);
+			if(rValue.includes("%NOME%")){
+				console.log("contiene nome");
+				numNomiRandom = 0;
+				frase = rValue;
+				while(frase.includes("%NOME%")){
+					pickRandomPlayer();
+					frase = frase.replace("%NOME%",'<span class="contornoNome">'+playerArrayRandom[randPlayer]+'</span>');
+					console.log("frase= "+frase);
+					numNomiRandom = numNomiRandom +1;
+				}
+				
+			}else{
+				frase = rValue;
+			}
+			console.log('numNomiRandom: '+numNomiRandom);
+			const azioneSel = document.getElementById('azione-Sel');
+			azioneSel.innerHTML=frase;
+		
+		}
+		
+		function pickRandomPlayer(){
+				//console.log("presentePlayer= "+presentePlayer);
+				presentePlayer=1;
+				
+				if(playerArrayRandom.length == playerArrayPassate.length){
+					//playerArrayPassate.length = 0;
+					
+					// Calcola la metà del vettore
+					let halfLength = Math.floor(playerArrayPassate.length / 2);
+					
+					// Rimuovi la prima metà degli elementi
+					playerArrayPassate.splice(0, halfLength);
+					console.log(playerArrayPassate);
+				}
+				
+				while(presentePlayer==1){
+				randPlayer = Math.floor(Math.random()*playerArrayRandom.length);
+				//console.log("randPlayer= "+randPlayer);
+				//console.log(playerArrayPassate);
+				presentePlayer=0;
+	
+				if(playerArrayPassate.indexOf(randPlayer) !== -1){
+					presentePlayer=1;
+				}
+
+			}
+			playerArrayPassate.push(randPlayer);
+			console.log("playerArrayRandom= " + playerArrayRandom.length + " playerArrayPassate= " + playerArrayPassate.length +" "+ playerArrayPassate);
+			console.log(randPlayer + " presentePlayer= " + presentePlayer);
+			console.log(playerArrayRandom[randPlayer]);
 		}
 
   	function azioneRandom(){
@@ -686,6 +1000,9 @@ window.addEventListener('beforeunload', function (e) {
 		const ckJenga = document.getElementById('ck-jenga');
 		const ckHot = document.getElementById('ck-hot');
 		const ckCards = document.getElementById('ck-cards');
+		const ckNew = document.getElementById('ck-new');
+		const ckNomerandom = document.getElementById('ck-nomerandom');
+		
 		
 		var chkGame = 1;
 		
@@ -720,7 +1037,23 @@ window.addEventListener('beforeunload', function (e) {
 				
 			}
 			
-			console.log(chkGame);
+			if(!ckNew.checked && rGame == 'NEW'){
+				chkGame=1;
+			}else{
+				
+			}
+			
+			if(!ckNomerandom.checked && rGame == 'NOMERANDOM'){
+				chkGame=1;
+			}else{
+				
+			}
+			
+			if(rGame != '' && rGame != 'HOT' && rGame != 'CARDS' && rGame != 'NEW' && rGame != 'NOMERANDOM'){
+				chkGame=1;
+			}
+			
+			console.log("rGame= " + rGame + " chkGame= "+chkGame);
 			
 			if(azioni.length == azioniPassate.length){
 				theEnd();
@@ -741,7 +1074,28 @@ window.addEventListener('beforeunload', function (e) {
     
 		const azioneSel = document.getElementById('azione-Sel');
     azioneSel.innerHTML = '';
-    azioneSel.textContent=rValue;
+    
+    //$$
+    
+			var frase;
+			if(rValue.includes("%NOME%")){
+				console.log("contiene nome");
+				numNomiRandom = 0;
+				frase = rValue;
+				while(frase.includes("%NOME%")){
+					pickRandomPlayer();
+					frase = frase.replace("%NOME%",'<span class="contornoNome">'+playerArrayRandom[randPlayer]+'</span>');
+					console.log("frase= "+frase);
+					numNomiRandom = numNomiRandom +1;
+				}
+				
+			}else{
+				frase = rValue;
+			}
+			//rValue = frase;
+			console.log('numNomiRandom: '+numNomiRandom);
+		azioneSel.innerHTML=frase;
+    //azioneSel.textContent=rValue;
     $('#azione-Sel').show();
     
 /*    const imgSel = document.getElementById('img-Sel');
@@ -758,7 +1112,26 @@ window.addEventListener('beforeunload', function (e) {
 		}else{
 			$('#img-Sel').hide();
 		}
+		if(rVideo!=undefined && rVideo!=''){
+    	const audioAzione = document.getElementById('audio-azione');
+    	audioAzione.pause();
+    	audioAzione.src="";
+    	$('#video-Sel').attr("src",rVideo);
+    	//$('#video-Sel').show();
+    	//$('#video-Sel').load();
+
+		}else{
+			$('#video-Sel').attr("src","");
+			$('#video-Sel').hide();
+		}
 		
+		nContaFatti=nContaFatti+1;
+		const contaFatti = document.getElementById('conta-fatti');
+    contaFatti.innerHTML = '';
+    contaFatti.innerHTML = nContaFatti;
+    
+    salvaPartita();
+    	
 		var color1=generateRandomColor();
 		var color2=generateRandomColor();
 		var newBgImage="linear-gradient(19deg, "+color1+" 0%, "+color2+" 100%)"
@@ -767,7 +1140,7 @@ window.addEventListener('beforeunload', function (e) {
     
     const ckAudio = document.getElementById('ck-audio');
 
-    if(ckAudio.checked){
+    if(ckAudio.checked && (rVideo == undefined || rVideo == '')){
     	
     	const audioAzione = document.getElementById('audio-azione');
     	
@@ -805,30 +1178,41 @@ window.addEventListener('beforeunload', function (e) {
   	
   	function startGame(){
 
-  		if($('#ck-language-ita').is(':checked')){
-  			loadGoogleSheetData();
-  		}
-  		
-  		if($('#ck-language-eng').is(':checked')){
-  			loadGoogleSheetDataEnglish();
-  		}
+
   		
   		loadGoogleSheetAudio();
+  		loadGoogleSheetPlayer();
   		
-  		const ckActions = document.getElementById('ck-actions');
-			const ckHot = document.getElementById('ck-hot');
-			const ckCards = document.getElementById('ck-cards');
+	 		const cckNewGame = document.getElementById('ck-new-game');
+  		const cckActions = document.getElementById('ck-actions');
+			const cckHot = document.getElementById('ck-hot');
+			const cckCards = document.getElementById('ck-cards');
+			const cckNew = document.getElementById('ck-new');
+			const cckNomerandom = document.getElementById('ck-nomerandom');
+			
 			
 			if(!$('#ck-language-ita').is(':checked') && !$('#ck-language-eng').is(':checked')){
 				alert("SELECT LANGUAGE");
 				return;
 			}
 			
-			if(!ckActions.checked && !ckHot.checked && !ckCards.checked){
+			if(cckNewGame.checked && !cckActions.checked && !cckHot.checked && !cckCards.checked && !cckNew.checked && !cckNomerandom.checked){
 				alert("SELECT ACTIONS");
 				return;
 			}
 			
+			if(!cckNewGame.checked){
+				caricaPartita();
+			}
+			
+			if($('#ck-language-ita').is(':checked')){
+  			loadGoogleSheetData();
+  		}
+  		
+  		if($('#ck-language-eng').is(':checked')){
+  			loadGoogleSheetDataEnglish();
+  		}
+
   		// NO JENGA
   		const ckJenga = document.getElementById('ck-jenga');
   		if(!ckJenga.checked){
@@ -846,7 +1230,7 @@ window.addEventListener('beforeunload', function (e) {
   			//audioAzione.src='https://github.com/Didacus85/letsgetwasted/raw/main/Ezekiele.mp3';
   			
 	  		try {
-				  audioAzione.play();
+				  //audioAzione.play();
 				} catch (error) {
 				  console.error(error);
 				}
@@ -868,9 +1252,11 @@ window.addEventListener('beforeunload', function (e) {
   		$('#azioneRandom-button').show();
   		$('#sceltaGioco-button').hide();
   		$('#switches').hide();
-  		$('#audio-button').fadeTo(1, 0);
+  		//$('#audio-button').fadeTo(1, 0);
 			$('#overlayNonSelezionabile').css("display","flex");
-
+			$('#resumeNewgame').hide();
+			$('#toggleBtn').show();
+			
   	}
   	
   	function theEnd(){
@@ -891,12 +1277,17 @@ window.addEventListener('beforeunload', function (e) {
 		//$('#img-Sel').attr("innerHTML",'');
     	$('#img-Sel').attr("src",'');
 			$('#img-Sel').hide();
+			$('#video-Sel').attr("src",'');
+			$('#video-Sel').hide();
 			
 			var color1='#7f00ff';
 			var color2='#e100ff';
 			var newBgImage="linear-gradient(19deg, "+color1+" 0%, "+color2+" 100%)"
 	
 	    document.body.style.backgroundImage = newBgImage;
+	    
+	    localStorage.clear();
+	    
   	}
   	
   	function startCountdown() {
@@ -952,6 +1343,7 @@ window.addEventListener('beforeunload', function (e) {
 		  //alert("released");
 		  clearTimeout(timeout);
 		  buttonPressed = false;
+		  videoPlayPause();
 		}
 		
 		function buttonAudioDown() {
@@ -960,7 +1352,7 @@ window.addEventListener('beforeunload', function (e) {
 		  buttonAudioPressed = true;
 		  buttonAudioPression = buttonAudioPression+1;
 		  startAudioTimer(buttonAudioPression);
-		  audioBtnActions();
+		  //audioBtnActions();
 		}
 		
 		function buttonAudioUp() {
@@ -975,7 +1367,7 @@ window.addEventListener('beforeunload', function (e) {
 			$('#azioneRandom-button').fadeTo(3000,1);
 			$('#azioneRandom-button').fadeTo(2000, 0);
 		}
-		
+		/*
 		function audioBtnActions(){
 
 			$('#audio-button').stop(true).fadeTo(1,1);
@@ -983,7 +1375,7 @@ window.addEventListener('beforeunload', function (e) {
 			$('#audio-button').fadeTo(2000, 0);
 
 		}
-		
+		*/
 		let buttonAudioPressed = false;
 		var buttonAudioPression = 0;
 		let timeoutAudio;
@@ -1087,8 +1479,8 @@ window.addEventListener('beforeunload', function (e) {
 			$('#azioneRandom-button').removeClass("buttonLandscape");
 			$('#azioneRandom-button').addClass("buttonPortrait");
 			
-			$('#audio-button').removeClass("audiobtnLandscape");
-			$('#audio-button').addClass("audiobtnPortrait");
+			//$('#audio-button').removeClass("audiobtnLandscape");
+			//$('#audio-button').addClass("audiobtnPortrait");
 			
 		}
 		
@@ -1115,11 +1507,139 @@ window.addEventListener('beforeunload', function (e) {
 			$('#azioneRandom-button').removeClass("buttonPortrait");
 			$('#azioneRandom-button').addClass("buttonLandscape");
 			
-			$('#audio-button').removeClass("audiobtnPortrait");
-			$('#audio-button').addClass("audiobtnLandscape");
+			//$('#audio-button').removeClass("audiobtnPortrait");
+			//$('#audio-button').addClass("audiobtnLandscape");
 			  
 		}
+		
+		function videoPlayPause(){
+			//alert(rVideo);
+			var videoElement = $('#video-Sel')[0];
+			
+			if (videoElement.paused && (rVideo!=undefined && rVideo!='')) {
+            videoElement.play();
+            $('#video-Sel').show();
+      } 
+      if (rVideo == undefined || rVideo == '') {
+            videoElement.pause();
+      }
+ 
+		}
+		
+		function salvaPartita() {
+			
+			const cckLanguageIta = document.getElementById('ck-language-ita');
+			const cckLanguageEng = document.getElementById('ck-language-eng');
+  		const cckActions = document.getElementById('ck-actions');
+			const cckHot = document.getElementById('ck-hot');
+			const cckCards = document.getElementById('ck-cards');
+			const cckNew = document.getElementById('ck-new');
+			const cckNomerandom = document.getElementById('ck-nomerandom');
 
+      localStorage.setItem("cacheAzioniPassate", JSON.stringify(azioniPassate));
+      localStorage.setItem("cacheAudioArrayPassate", JSON.stringify(audioArrayPassate));
+      localStorage.setItem("cachePlayerArrayPassate", JSON.stringify(playerArrayPassate));
+      localStorage.setItem("cacheNContaFatti", nContaFatti);
+      localStorage.setItem("cacheChkLanguageIta", cckLanguageIta.checked);
+      localStorage.setItem("cacheChkLanguageEng", cckLanguageEng.checked);
+      localStorage.setItem("cacheChkActions", cckActions.checked);
+      localStorage.setItem("cacheChkCards", cckCards.checked);
+      localStorage.setItem("cacheChkHot", cckHot.checked);
+      localStorage.setItem("cacheChkNew", cckNew.checked);
+			localStorage.setItem("cacheChkNomerandom", cckNomerandom.checked);      
+
+      
+      //alert("Partita salvata nella cache!" + azioniPassate + " " + JSON.stringify(azioniPassate));
+      console.log('azioniPassate: ' + azioniPassate); // Stampa l'array nella console
+      console.log('audioArrayPassate: '+ audioArrayPassate); // Stampa l'array nella console
+      console.log('playerArrayPassate: ' + playerArrayPassate); // Stampa l'array nella console
+      console.log('nContaFatti: ' + nContaFatti);
+      console.log('cacheChkLanguageIta: ' + localStorage.getItem("cacheChkLanguageIta"));
+      console.log('cacheChkLanguageEng: ' + localStorage.getItem("cacheChkLanguageEng"));
+      console.log('cacheChkActions: ' + localStorage.getItem("cacheChkActions"));
+      console.log('cacheChkCards: ' + localStorage.getItem("cacheChkCards"));
+      console.log('cacheChkHot: ' + localStorage.getItem("cacheChkHot"));
+      console.log('cacheChkNew: ' + localStorage.getItem("cacheChkNew"));
+      console.log('cacheChkNomerandom: ' + localStorage.getItem("cacheChkNomerandom"));
+    }
+    
+    function caricaPartita() {
+    	
+    	var jsonAzioniPassate = localStorage.getItem("cacheAzioniPassate");
+    	var jsonAudioArrayPassate = localStorage.getItem("cacheAudioArrayPassate");
+    	var jsonPlayerArrayPassate = localStorage.getItem("cachePlayerArrayPassate");
+    	nContaFatti = Number(localStorage.getItem("cacheNContaFatti"));
+			//alert("Partita caricata dalla cache!" + jsonAzioniPassate + " " + jsonNContaFatti);
+			//alert("Partita caricata dalla cache!" + azioniPassate + " " + jsonNContaFatti);
+			
+			if (jsonAzioniPassate) {
+        azioniPassate = JSON.parse(jsonAzioniPassate); // Converte la stringa JSON in un array
+        //alert("Array recuperato dalla cache azioniPassate: " + azioniPassate);
+        console.log('azioniPassate: ' + azioniPassate); // Stampa l'array nella console
+      } else {
+        alert("Nessun array trovato nella cache.");
+      }
+      
+      if (jsonAudioArrayPassate) {
+        audioArrayPassate = JSON.parse(jsonAudioArrayPassate); // Converte la stringa JSON in un array
+        //alert("Array recuperato dalla cache audioArrayPassate: " + audioArrayPassate);
+        console.log('audioArrayPassate: '+ audioArrayPassate); // Stampa l'array nella console
+      } else {
+        alert("Nessun array trovato nella cache.");
+      }
+      
+      if (jsonPlayerArrayPassate) {
+        playerArrayPassate = JSON.parse(jsonPlayerArrayPassate); // Converte la stringa JSON in un array
+        //alert("Array recuperato dalla cache playerArrayPassate: " + playerArrayPassate);
+        console.log('playerArrayPassate: ' + playerArrayPassate); // Stampa l'array nella console
+      } else {
+        alert("Nessun array trovato nella cache.");
+      }
+      
+      console.log('nContaFatti: ' + nContaFatti);
+      /*
+      console.log('cacheChkActions: ' + localStorage.getItem("cacheChkActions"));
+      console.log('cacheChkCards: ' + localStorage.getItem("cacheChkCards"));
+      console.log('cacheChkHot: ' + localStorage.getItem("cacheChkHot"));
+      console.log('cacheChkNew: ' + localStorage.getItem("cacheChkNew"));
+      console.log('cacheChkNomerandom: ' + localStorage.getItem("cacheChkNomerandom"));
+			
+			console.log($('#ck-actions').is(':checked'));
+			console.log($('#ck-cards').is(':checked'));
+			console.log($('#ck-hot').is(':checked'));
+			console.log($('#ck-new').is(':checked'));
+			console.log($('#ck-nomerandom').is(':checked'));*/
+			
+			if(localStorage.getItem("cacheChkLanguageIta") === 'true'){
+				$('#ck-language-ita').prop('checked', true);
+				console.log('language-ita ' + $('#ck-language-ita').is(':checked'));
+			}
+			if(localStorage.getItem("cacheChkLanguageEng") === 'true'){
+				$('#ck-language-eng').prop('checked', true);
+				console.log('language-eng ' + $('#ck-language-eng').is(':checked'));
+			}
+			if(localStorage.getItem("cacheChkActions") === 'true'){
+				$('#ck-actions').prop('checked', true);
+				console.log('actions ' + $('#ck-actions').is(':checked'));
+			}
+			if(localStorage.getItem("cacheChkCards") === 'true'){
+				$('#ck-cards').prop('checked', true);
+				console.log('cards ' + $('#ck-cards').is(':checked'));
+			}
+			if(localStorage.getItem("cacheChkHot") === 'true'){
+				$('#ck-hot').prop('checked', true);
+				console.log('hot ' + $('#ck-hot').is(':checked'));
+			}
+			if(localStorage.getItem("cacheChkNew") === 'true'){
+				$('#ck-new').prop('checked', true);
+				console.log('new ' + $('#ck-new').is(':checked'));
+			}
+			if(localStorage.getItem("cacheChkNomerandom") === 'true'){
+				$('#ck-nomerandom').prop('checked', true);
+				console.log('nomerandom ' + $('#ck-nomerandom').is(':checked'));
+			}
+    }
+    
 
 		$(document).ready(function(){
 	  	// Aggiungi gli eventi per il pulsante
@@ -1140,7 +1660,8 @@ window.addEventListener('beforeunload', function (e) {
 			myButton.addEventListener('touchend', buttonUp);
 			myButton.addEventListener('touchmove', buttonUp);
 			
-			const myAudioButton = document.getElementById('audio-button');
+			//const myAudioButton = document.getElementById('audio-button');
+			const myAudioButton = document.getElementById('sideAudio');
 			//myAudioButton.addEventListener('mousedown', buttonAudioDown);
 			myAudioButton.addEventListener('mouseup', buttonAudioUp);
 			myAudioButton.addEventListener('mouseleave', buttonAudioUp);
@@ -1148,7 +1669,53 @@ window.addEventListener('beforeunload', function (e) {
 			myAudioButton.addEventListener(tstart, buttonAudioDown);
 			myAudioButton.addEventListener('touchend', buttonAudioUp);
 			myAudioButton.addEventListener('touchmove', buttonAudioUp);
+			
 
+	    $('#ck-new-game').change(function() {
+	        if ($(this).is(':checked')) {
+
+	          $('#divSceltaGioco').show();
+	          $('#resumeNewgame').text('NEW GAME');
+	          
+	        } else {
+
+	          $('#divSceltaGioco').hide();
+	          $('#resumeNewgame').text('RESUME GAME');
+	        }
+	     });
+	     
+	     //localStorage.clear();
+	     
+	     if (localStorage.length === 0) {
+            console.log("Il localStorage è vuoto. Esegui l'azione necessaria.");
+            
+            $('#ck-new-game').prop('checked', true);
+            $('#ck-new-game').change();
+            $('#ck-new-game').prop('disabled', true);
+            $('#div-ck-new-game').hide();
+            //$('#div-ck-new-game').addClass('nascondi');
+            
+        } else {
+            
+            console.log("Elementi in localStorage:", localStorage);
+        }
+        
+        $(document).ready(function() {
+            let sidebar = $('#sidebar');
+            let toggleBtn = $('#toggleBtn');
+
+            // Gestisci il clic sul pulsante
+            toggleBtn.click(function() {
+                sidebar.toggleClass('open'); // Aggiungi o rimuovi la classe 'open'
+            });
+
+            // Chiudi la sidebar se si clicca fuori
+            $(document).on('click', function(e) {
+                if (!$(e.target).closest('#sidebar, #toggleBtn').length && sidebar.hasClass('open')) {
+                    sidebar.removeClass('open'); // Chiudi la sidebar
+                }
+            });
+        });
 		});
 
 
@@ -1158,13 +1725,20 @@ window.addEventListener('beforeunload', function (e) {
 		switchPortrait();
 		//switchLandscape();
     $('#img-Sel').hide();
+    $('#video-Sel').hide();
 
 		$('#azione-Sel').hide();
 		$('#azioneRandom-button').hide();
 		$('#audio-button').hide();
 		//$('#regole').hide();
 		$('#div-ck-jenga').hide();
-
+		$('#div-ck-audio').hide();
+		
+		$('#divSceltaGioco').hide();
+		//$('#div-ck-new').hide();
+		//$('#div-ck-nomerandom').hide();
+		
+		$('#toggleBtn').hide();
 		
 		window.matchMedia("(orientation: portrait)").addEventListener("change", e => {
     const portrait = e.matches;
@@ -1179,7 +1753,7 @@ window.addEventListener('beforeunload', function (e) {
         switchLandscape();
     }
 });
-
+	
   </script>
   
 
