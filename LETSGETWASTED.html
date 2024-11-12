@@ -580,6 +580,50 @@ input:checked + label:after {
 	filter: drop-shadow(0 0 1mm white);
 }
 
+/* Stile delle stelle */
+.stella {
+  position: absolute;
+  top: -21px;
+  width: 20px;
+  height: 20px;
+  background: yellow;
+  border: 2px solid black; /* Contorno nero */
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  opacity: 1;
+  animation: caduta-stelle 8s linear infinite;
+  z-index: -1;
+}
+
+.starburst {
+	position: absolute;
+  top: -30px;
+  width: 30px;
+  height: 30px;
+  background: yellow;
+  border: 2px solid black; /* Contorno nero */
+	/*clip-path: polygon(100% 50%,64.49% 53.88%,93.3% 75%,60.61% 60.61%,75% 93.3%,53.88% 64.49%,50% 100%,46.12% 64.49%,25% 93.3%,39.39% 60.61%,6.7% 75%,35.51% 53.88%,0% 50%,35.51% 46.12%,6.7% 25%,39.39% 39.39%,25% 6.7%,46.12% 35.51%,50% 0%,53.88% 35.51%,75% 6.7%,60.61% 39.39%,93.3% 25%,64.49% 46.12%);*/
+	clip-path: polygon(100% 50%,63.86% 55.74%,85.36% 85.36%,55.74% 63.86%,50% 100%,44.26% 63.86%,14.64% 85.36%,36.14% 55.74%,0% 50%,36.14% 44.26%,14.64% 14.64%,44.26% 36.14%,50% 0%,55.74% 36.14%,85.36% 14.64%,63.86% 44.26%);
+	opacity: 1;
+  animation: caduta-stelle 8s linear infinite;
+  z-index: -1;
+}
+
+/* Animazione delle stelle */
+@keyframes caduta-stelle {
+  0% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+    opacity: 1;
+  }
+  70% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(95vh) translateX(calc(-50px + 50px * var(--random-x))) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+    
 </style>
 <body id="corpo" oncontextmenu="return false;">
 
@@ -641,7 +685,7 @@ input:checked + label:after {
 		<br>
 		<br>
 		<div>
-				<input id="ck-actions" name="ck-actions" type="checkbox"  />
+				<input id="ck-actions" name="ck-actions" type="checkbox" checked />
 				<label for="ck-actions"></label>
 				Actions
 		</div>
@@ -653,31 +697,32 @@ input:checked + label:after {
 		<br>
 		</div>
 		<div>
-				<input id="ck-cards" name="ck-cards" type="checkbox"  />
+				<input id="ck-cards" name="ck-cards" type="checkbox" checked />
 				<label for="ck-cards"></label>
 				Cards
 		</div>
 		<br>
 			<div>
-					<input id="ck-hot" name="ck-hot" type="checkbox"  />
+					<input id="ck-hot" name="ck-hot" type="checkbox" checked />
 					<label for="ck-hot"></label>
 					Hot
 			</div>
 		<br>
+		<div id="div-ck-jackpot">
+				<input id="ck-jackpot" name="ck-jackpot" type="checkbox" checked />
+				<label for="ck-jackpot"></label>
+				Jackpot
+		<br>
+		</div>
 		<div id="div-ck-new">
 				<input id="ck-new" name="ck-new" type="checkbox"  />
 				<label for="ck-new"></label>
 				New
 		</div>
 		<br>
-		<div id="div-ck-nomerandom">
-				<input id="ck-nomerandom" name="ck-nomerandom" type="checkbox"  />
-				<label for="ck-nomerandom"></label>
-				Nome Random
 		<br>
 		<br>
-		<br>
-		</div>
+		
 		</div>
 
 		<div>
@@ -729,6 +774,7 @@ var audioArrayPassate = new Array();
 var audioArrayRandom = new Array();
 var playerArrayRandom = new Array();
 var playerArrayPassate = new Array();
+var jackpotArrayPassate = new Array();
 
 var rand = 0;
 var randAudio = 0;
@@ -980,6 +1026,41 @@ window.addEventListener('beforeunload', function (e) {
 			console.log(randPlayer + " presentePlayer= " + presentePlayer);
 			console.log(playerArrayRandom[randPlayer]);
 		}
+		
+		function pickRandomPlayerJackpot(){
+				//console.log("presentePlayer= "+presentePlayer);
+				presentePlayer=1;
+				
+				if(playerArrayRandom.length == jackpotArrayPassate.length){
+					//jackpotArrayPassate.length = 0;
+					
+					// Calcola la metà del vettore
+					let halfLength = Math.floor(jackpotArrayPassate.length / 2);
+					
+					// Rimuovi la prima metà degli elementi
+					jackpotArrayPassate.splice(0, halfLength);
+					console.log(jackpotArrayPassate);
+				}
+				
+				while(presentePlayer==1){
+				randPlayer = Math.floor(Math.random()*playerArrayRandom.length);
+				//console.log("randPlayer= "+randPlayer);
+				//console.log(jackpotArrayPassate);
+				presentePlayer=0;
+	
+				if(jackpotArrayPassate.indexOf(randPlayer) !== -1){
+					presentePlayer=1;
+				}
+
+			}
+			jackpotArrayPassate.push(randPlayer);
+			console.log("playerArrayRandom= " + playerArrayRandom.length + " jackpotArrayPassate= " + jackpotArrayPassate.length +" "+ jackpotArrayPassate);
+			console.log(randPlayer + " presentePlayer= " + presentePlayer);
+			console.log(playerArrayRandom[randPlayer]);
+			
+			// Crea 100 stelle cadenti
+    	creaStelle(50);
+		}
 
   	function azioneRandom(){
   	
@@ -1001,7 +1082,7 @@ window.addEventListener('beforeunload', function (e) {
 		const ckHot = document.getElementById('ck-hot');
 		const ckCards = document.getElementById('ck-cards');
 		const ckNew = document.getElementById('ck-new');
-		const ckNomerandom = document.getElementById('ck-nomerandom');
+		const ckJackpot = document.getElementById('ck-jackpot');
 		
 		
 		var chkGame = 1;
@@ -1043,13 +1124,13 @@ window.addEventListener('beforeunload', function (e) {
 				
 			}
 			
-			if(!ckNomerandom.checked && rGame == 'NOMERANDOM'){
+			if(!ckJackpot.checked && rGame == 'JACKPOT'){
 				chkGame=1;
 			}else{
 				
 			}
 			
-			if(rGame != '' && rGame != 'HOT' && rGame != 'CARDS' && rGame != 'NEW' && rGame != 'NOMERANDOM'){
+			if(rGame != '' && rGame != 'HOT' && rGame != 'CARDS' && rGame != 'NEW' && rGame != 'JACKPOT'){
 				chkGame=1;
 			}
 			
@@ -1075,6 +1156,7 @@ window.addEventListener('beforeunload', function (e) {
 		const azioneSel = document.getElementById('azione-Sel');
     azioneSel.innerHTML = '';
     
+    fermaAnimazioni();
     //$$
     
 			var frase;
@@ -1083,7 +1165,12 @@ window.addEventListener('beforeunload', function (e) {
 				numNomiRandom = 0;
 				frase = rValue;
 				while(frase.includes("%NOME%")){
-					pickRandomPlayer();
+					if(rGame == 'JACKPOT'){
+						pickRandomPlayerJackpot();
+					}else{
+						pickRandomPlayer();
+					}
+					
 					frase = frase.replace("%NOME%",'<span class="contornoNome">'+playerArrayRandom[randPlayer]+'</span>');
 					console.log("frase= "+frase);
 					numNomiRandom = numNomiRandom +1;
@@ -1188,7 +1275,7 @@ window.addEventListener('beforeunload', function (e) {
 			const cckHot = document.getElementById('ck-hot');
 			const cckCards = document.getElementById('ck-cards');
 			const cckNew = document.getElementById('ck-new');
-			const cckNomerandom = document.getElementById('ck-nomerandom');
+			const cckJackpot = document.getElementById('ck-jackpot');
 			
 			
 			if(!$('#ck-language-ita').is(':checked') && !$('#ck-language-eng').is(':checked')){
@@ -1196,7 +1283,7 @@ window.addEventListener('beforeunload', function (e) {
 				return;
 			}
 			
-			if(cckNewGame.checked && !cckActions.checked && !cckHot.checked && !cckCards.checked && !cckNew.checked && !cckNomerandom.checked){
+			if(cckNewGame.checked && !cckActions.checked && !cckHot.checked && !cckCards.checked && !cckNew.checked && !cckJackpot.checked){
 				alert("SELECT ACTIONS");
 				return;
 			}
@@ -1519,7 +1606,8 @@ window.addEventListener('beforeunload', function (e) {
 			if (videoElement.paused && (rVideo!=undefined && rVideo!='')) {
             videoElement.play();
             $('#video-Sel').show();
-      } 
+      }
+
       if (rVideo == undefined || rVideo == '') {
             videoElement.pause();
       }
@@ -1534,11 +1622,12 @@ window.addEventListener('beforeunload', function (e) {
 			const cckHot = document.getElementById('ck-hot');
 			const cckCards = document.getElementById('ck-cards');
 			const cckNew = document.getElementById('ck-new');
-			const cckNomerandom = document.getElementById('ck-nomerandom');
+			const cckJackpot = document.getElementById('ck-jackpot');
 
       localStorage.setItem("cacheAzioniPassate", JSON.stringify(azioniPassate));
       localStorage.setItem("cacheAudioArrayPassate", JSON.stringify(audioArrayPassate));
       localStorage.setItem("cachePlayerArrayPassate", JSON.stringify(playerArrayPassate));
+      localStorage.setItem("cacheJackpotArrayPassate", JSON.stringify(jackpotArrayPassate));
       localStorage.setItem("cacheNContaFatti", nContaFatti);
       localStorage.setItem("cacheChkLanguageIta", cckLanguageIta.checked);
       localStorage.setItem("cacheChkLanguageEng", cckLanguageEng.checked);
@@ -1546,13 +1635,14 @@ window.addEventListener('beforeunload', function (e) {
       localStorage.setItem("cacheChkCards", cckCards.checked);
       localStorage.setItem("cacheChkHot", cckHot.checked);
       localStorage.setItem("cacheChkNew", cckNew.checked);
-			localStorage.setItem("cacheChkNomerandom", cckNomerandom.checked);      
+			localStorage.setItem("cacheChkJackpot", cckJackpot.checked);      
 
       
       //alert("Partita salvata nella cache!" + azioniPassate + " " + JSON.stringify(azioniPassate));
       console.log('azioniPassate: ' + azioniPassate); // Stampa l'array nella console
       console.log('audioArrayPassate: '+ audioArrayPassate); // Stampa l'array nella console
       console.log('playerArrayPassate: ' + playerArrayPassate); // Stampa l'array nella console
+      console.log('jackpotArrayPassate: ' + jackpotArrayPassate); // Stampa l'array nella console
       console.log('nContaFatti: ' + nContaFatti);
       console.log('cacheChkLanguageIta: ' + localStorage.getItem("cacheChkLanguageIta"));
       console.log('cacheChkLanguageEng: ' + localStorage.getItem("cacheChkLanguageEng"));
@@ -1560,7 +1650,7 @@ window.addEventListener('beforeunload', function (e) {
       console.log('cacheChkCards: ' + localStorage.getItem("cacheChkCards"));
       console.log('cacheChkHot: ' + localStorage.getItem("cacheChkHot"));
       console.log('cacheChkNew: ' + localStorage.getItem("cacheChkNew"));
-      console.log('cacheChkNomerandom: ' + localStorage.getItem("cacheChkNomerandom"));
+      console.log('cacheChkJackpot: ' + localStorage.getItem("cacheChkJackpot"));
     }
     
     function caricaPartita() {
@@ -1568,6 +1658,7 @@ window.addEventListener('beforeunload', function (e) {
     	var jsonAzioniPassate = localStorage.getItem("cacheAzioniPassate");
     	var jsonAudioArrayPassate = localStorage.getItem("cacheAudioArrayPassate");
     	var jsonPlayerArrayPassate = localStorage.getItem("cachePlayerArrayPassate");
+    	var jsonJackpotArrayPassate = localStorage.getItem("cacheJackpotArrayPassate");
     	nContaFatti = Number(localStorage.getItem("cacheNContaFatti"));
 			//alert("Partita caricata dalla cache!" + jsonAzioniPassate + " " + jsonNContaFatti);
 			//alert("Partita caricata dalla cache!" + azioniPassate + " " + jsonNContaFatti);
@@ -1596,48 +1687,77 @@ window.addEventListener('beforeunload', function (e) {
         alert("Nessun array trovato nella cache.");
       }
       
+      if (jsonJackpotArrayPassate) {
+        jackpotArrayPassate = JSON.parse(jsonJackpotArrayPassate); // Converte la stringa JSON in un array
+        //alert("Array recuperato dalla cache jackpotArrayPassate: " + jackpotArrayPassate);
+        console.log('jackpotArrayPassate: ' + jackpotArrayPassate); // Stampa l'array nella console
+      } else {
+        alert("Nessun array trovato nella cache.");
+      }
+      
       console.log('nContaFatti: ' + nContaFatti);
       /*
       console.log('cacheChkActions: ' + localStorage.getItem("cacheChkActions"));
       console.log('cacheChkCards: ' + localStorage.getItem("cacheChkCards"));
       console.log('cacheChkHot: ' + localStorage.getItem("cacheChkHot"));
       console.log('cacheChkNew: ' + localStorage.getItem("cacheChkNew"));
-      console.log('cacheChkNomerandom: ' + localStorage.getItem("cacheChkNomerandom"));
+      console.log('cacheChkJackpot: ' + localStorage.getItem("cacheChkJackpot"));
 			
 			console.log($('#ck-actions').is(':checked'));
 			console.log($('#ck-cards').is(':checked'));
 			console.log($('#ck-hot').is(':checked'));
 			console.log($('#ck-new').is(':checked'));
-			console.log($('#ck-nomerandom').is(':checked'));*/
+			console.log($('#ck-jackpot').is(':checked'));*/
 			
 			if(localStorage.getItem("cacheChkLanguageIta") === 'true'){
 				$('#ck-language-ita').prop('checked', true);
 				console.log('language-ita ' + $('#ck-language-ita').is(':checked'));
+			}else{
+				$('#ck-language-ita').prop('checked', false);
 			}
+			
 			if(localStorage.getItem("cacheChkLanguageEng") === 'true'){
 				$('#ck-language-eng').prop('checked', true);
 				console.log('language-eng ' + $('#ck-language-eng').is(':checked'));
+			}else{
+				$('#ck-language-eng').prop('checked', false);
 			}
+			
 			if(localStorage.getItem("cacheChkActions") === 'true'){
 				$('#ck-actions').prop('checked', true);
 				console.log('actions ' + $('#ck-actions').is(':checked'));
+			}else{
+				$('#ck-actions').prop('checked', false);
 			}
+			
 			if(localStorage.getItem("cacheChkCards") === 'true'){
 				$('#ck-cards').prop('checked', true);
 				console.log('cards ' + $('#ck-cards').is(':checked'));
+			}else{
+				$('#ck-cards').prop('checked', false);
 			}
+			
 			if(localStorage.getItem("cacheChkHot") === 'true'){
 				$('#ck-hot').prop('checked', true);
 				console.log('hot ' + $('#ck-hot').is(':checked'));
+			}else{
+				$('#ck-hot').prop('checked', false);
 			}
+			
 			if(localStorage.getItem("cacheChkNew") === 'true'){
 				$('#ck-new').prop('checked', true);
 				console.log('new ' + $('#ck-new').is(':checked'));
+			}else{
+				$('#ck-new').prop('checked', false);
 			}
-			if(localStorage.getItem("cacheChkNomerandom") === 'true'){
-				$('#ck-nomerandom').prop('checked', true);
-				console.log('nomerandom ' + $('#ck-nomerandom').is(':checked'));
+			
+			if(localStorage.getItem("cacheChkJackpot") === 'true'){
+				$('#ck-jackpot').prop('checked', true);
+				console.log('jackpot ' + $('#ck-jackpot').is(':checked'));
+			}else{
+				$('#ck-jackpot').prop('checked', false);
 			}
+			
     }
     
 
@@ -1735,8 +1855,8 @@ window.addEventListener('beforeunload', function (e) {
 		$('#div-ck-audio').hide();
 		
 		$('#divSceltaGioco').hide();
-		//$('#div-ck-new').hide();
-		//$('#div-ck-nomerandom').hide();
+		$('#div-ck-new').hide();
+		//$('#div-ck-jackpot').hide();
 		
 		$('#toggleBtn').hide();
 		
@@ -1753,7 +1873,44 @@ window.addEventListener('beforeunload', function (e) {
         switchLandscape();
     }
 });
-	
+
+function creaStelle(numStelle) {
+  for (let i = 0; i < numStelle; i++) {
+    const stella = document.createElement("div");
+    const starburst = document.createElement("div");
+    stella.classList.add("stella");
+    starburst.classList.add("starburst");
+
+    // Limita la posizione orizzontale per evitare i bordi
+    const minMargin = 5; // margine minimo in vw
+    const maxMargin = 95; // margine massimo in vw
+    stella.style.left = minMargin + Math.random() * (maxMargin - minMargin) + "vw";
+    starburst.style.left = minMargin + Math.random() * (maxMargin - minMargin) + "vw";
+
+    // Ritardo casuale per l'animazione
+    stella.style.animationDelay = Math.random() * 5 + "s";
+		starburst.style.animationDelay = Math.random() * 5 + "s";
+		
+    // Durata casuale per variare la velocità di caduta
+    stella.style.animationDuration = 2 + Math.random() * 5 + "s";
+		starburst.style.animationDuration = 2 + Math.random() * 5 + "s";
+    
+    // Valore casuale per movimento orizzontale
+    stella.style.setProperty('--random-x', Math.random());
+		starburst.style.setProperty('--random-x', Math.random());
+		
+    // Aggiungi la stella alla pagina
+    document.body.appendChild(stella);
+    document.body.appendChild(starburst);
+  }
+}
+    
+function fermaAnimazioni() {
+	// Seleziona tutti gli elementi con la classe "stella" e li rimuove
+	document.querySelectorAll(".stella").forEach(stella => stella.remove());
+	document.querySelectorAll(".starburst").forEach(stella => stella.remove());
+}
+
   </script>
   
 
