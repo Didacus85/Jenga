@@ -981,7 +981,8 @@ window.addEventListener('beforeunload', function (e) {
 				frase = rValue;
 				while(frase.includes("%NOME%")){
 					pickRandomPlayer();
-					frase = frase.replace("%NOME%",'<span class="contornoNome">'+playerArrayRandom[randPlayer]+'</span>');
+					//frase = frase.replace("%NOME%",'<span class="contornoNome">'+playerArrayRandom[randPlayer]+'</span>');
+					frase = frase.replace("%NOME%",'<span class="contornoNome">'+rVectPlayerRandom[0]+'</span>');
 					console.log("frase= "+frase);
 					numNomiRandom = numNomiRandom +1;
 				}
@@ -1022,9 +1023,11 @@ window.addEventListener('beforeunload', function (e) {
 
 			}
 			playerArrayPassate.push(randPlayer);
+			rVectPlayerRandom=playerArrayRandom[randPlayer];
 			console.log("playerArrayRandom= " + playerArrayRandom.length + " playerArrayPassate= " + playerArrayPassate.length +" "+ playerArrayPassate);
 			console.log(randPlayer + " presentePlayer= " + presentePlayer);
 			console.log(playerArrayRandom[randPlayer]);
+			console.log("rVectPlayerRandom: " + rVectPlayerRandom);
 		}
 		
 		function pickRandomPlayerJackpot(){
@@ -1054,9 +1057,11 @@ window.addEventListener('beforeunload', function (e) {
 
 			}
 			jackpotArrayPassate.push(randPlayer);
+			rVectPlayerRandom=playerArrayRandom[randPlayer];
 			console.log("playerArrayRandom= " + playerArrayRandom.length + " jackpotArrayPassate= " + jackpotArrayPassate.length +" "+ jackpotArrayPassate);
 			console.log(randPlayer + " presentePlayer= " + presentePlayer);
 			console.log(playerArrayRandom[randPlayer]);
+			console.log("rVectPlayerRandom: " + rVectPlayerRandom);
 			
 			// Crea 100 stelle cadenti
     	creaStelle(50);
@@ -1171,7 +1176,8 @@ window.addEventListener('beforeunload', function (e) {
 						pickRandomPlayer();
 					}
 					
-					frase = frase.replace("%NOME%",'<span class="contornoNome">'+playerArrayRandom[randPlayer]+'</span>');
+					//frase = frase.replace("%NOME%",'<span class="contornoNome">'+playerArrayRandom[randPlayer]+'</span>');
+					frase = frase.replace("%NOME%",'<span class="contornoNome">'+rVectPlayerRandom[0]+'</span>');
 					console.log("frase= "+frase);
 					numNomiRandom = numNomiRandom +1;
 				}
@@ -1193,8 +1199,20 @@ window.addEventListener('beforeunload', function (e) {
 	
     //console.log(rImg);
     if(rImg!=undefined && rImg!=''){
+    	//$$$
+    	if(rImg.includes("%PLAYERIMG")){
+    		//rVectPlayerRandom = playerArrayRandom[0];
+    		let numImg = rImg.replace("%PLAYERIMG_", "");
+    		numImg = numImg.replace("%", "");
+    		console.log("numImg: " + numImg);
+    		playerImg = rVectPlayerRandom[numImg];
+
+    		$('#img-Sel').attr("src",playerImg);
+    	}else{
+    		$('#img-Sel').attr("src",rImg);
+    	}
+    	
     	/*imgSel.src=rImg;*/
-			$('#img-Sel').attr("src",rImg);
 	    $('#img-Sel').show();
 		}else{
 			$('#img-Sel').hide();
