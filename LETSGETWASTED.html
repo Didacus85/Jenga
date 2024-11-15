@@ -15,7 +15,7 @@ head {
 }
 
 body {
-	margin: 0;
+	/*margin: 0;*/
 	font-family: 'Bangers', regular;
   height: 100vh;
   background-color: #7f00ff;
@@ -389,6 +389,23 @@ input:checked + label:after {
 
 }
 
+.switchsinistri{
+	
+	position: absolute; 
+	left: 0%; 
+	top: 0; 
+	/*background-color: lightblue;*/
+}
+
+.switchdestri{
+	
+	position: absolute; 
+	left: 50%; 
+	top: 0; 	
+	/*background-color: lightgreen;*/
+
+}
+
 #overlay {
   display: none;
   position: fixed;
@@ -661,6 +678,7 @@ input:checked + label:after {
 <div class="blinking-text" id="resumeNewgame">RESUME GAME</div>
 
 <div id="switches" class="switches contornoBianco">
+		<div class="switchsinistri">
 		<div id="div-ck-new-game">
 				<input id="ck-new-game" name="ck-new-game" type="checkbox" />
 				<label for="ck-new-game"></label>
@@ -722,9 +740,10 @@ input:checked + label:after {
 		<br>
 		<br>
 		<br>
-		
 		</div>
-
+		</div>
+		
+		<div class="switchdestri">
 		<div>
 				<input id="ck-countdown" name="ck-countdown" type="checkbox"  />
 				<label for="ck-countdown"></label>
@@ -736,7 +755,7 @@ input:checked + label:after {
 				<label for="ck-audio"></label>
 				Audio
 		</div>
-
+		</div>
 
 </div><!--switches-->
 
