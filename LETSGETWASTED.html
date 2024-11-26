@@ -7,6 +7,7 @@
   <title>LETS GET WASTED</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Bangers" rel="stylesheet">
+<link href="https://fonts.cdnfonts.com/css/face-your-fears" rel="stylesheet">
 </head>
 <style>
 
@@ -90,6 +91,12 @@ h3 {
   font-size: 20px;
 }
 
+.horror {
+	color: #ff0000;
+	font-weight: 550;
+	font-family: 'Face Your Fears', sans-serif;
+	/*font-family: 'Chiller', regular;*/
+}
 
 .imgAzione{
 	width: auto;
@@ -457,7 +464,7 @@ input:checked + label:after {
 }
 
 .contornoNeroStrong {
-	color: white; /* Colore del testo */
+	/*color: white; /* Colore del testo */
   text-shadow: 
   	-2px -4px 0 #000,
     1px -1px 0 #000,
@@ -466,7 +473,7 @@ input:checked + label:after {
 }
 
 .contornoNero {
-	color: white; /* Colore del testo */
+	/*color: white; /* Colore del testo */
   text-shadow: 
   	-2px -2px 0 #000,
     1px -1px 0 #000,
@@ -940,6 +947,40 @@ window.addEventListener('beforeunload', function (e) {
 		  }
 		  return color;
 		}
+		
+		function generateRandomColorRed() {
+		  const lettersR = 'ABCDEF'; // Caratteri validi per rappresentare i colori in formato esadecimale
+		  const lettersG = '0'; // Caratteri validi per rappresentare i colori in formato esadecimale
+		  const lettersB = '0123456789ABCDEF'; // Caratteri validi per rappresentare i colori in formato esadecimale
+		  let color = '#';
+		  for (let i = 0; i < 2; i++) {
+		    color += lettersR[Math.floor(Math.random() * lettersR.length)]; // Scegli un carattere casuale da 'letters'
+		  }
+		  for (let i = 0; i < 2; i++) {
+		    color += lettersG[Math.floor(Math.random() * lettersG.length)]; // Scegli un carattere casuale da 'letters'
+		  }
+		  for (let i = 0; i < 2; i++) {
+		    color += lettersB[Math.floor(Math.random() * lettersB.length)]; // Scegli un carattere casuale da 'letters'
+		  }
+		  return color;
+		}
+		
+		function generateRandomColorBlack() {
+		  const lettersR = '0'; // Caratteri validi per rappresentare i colori in formato esadecimale
+		  const lettersG = '0'; // Caratteri validi per rappresentare i colori in formato esadecimale
+		  const lettersB = '0'; // Caratteri validi per rappresentare i colori in formato esadecimale
+		  let color = '#';
+		  for (let i = 0; i < 2; i++) {
+		    color += lettersR[Math.floor(Math.random() * lettersR.length)]; // Scegli un carattere casuale da 'letters'
+		  }
+		  for (let i = 0; i < 2; i++) {
+		    color += lettersG[Math.floor(Math.random() * lettersG.length)]; // Scegli un carattere casuale da 'letters'
+		  }
+		  for (let i = 0; i < 2; i++) {
+		    color += lettersB[Math.floor(Math.random() * lettersB.length)]; // Scegli un carattere casuale da 'letters'
+		  }
+		  return color;
+		}
 
 		function pickRandom(){
 			
@@ -1154,7 +1195,13 @@ window.addEventListener('beforeunload', function (e) {
 				
 			}
 			
-			if(rGame != '' && rGame != 'HOT' && rGame != 'CARDS' && rGame != 'NEW' && rGame != 'JACKPOT'){
+			if(!ckActions.checked && rGame == 'HORROR'){
+				chkGame=1;
+			}else{
+				
+			}
+			
+			if(rGame != '' && rGame != 'HOT' && rGame != 'CARDS' && rGame != 'NEW' && rGame != 'JACKPOT' && rGame != 'HORROR'){
 				chkGame=1;
 			}
 			
@@ -1255,9 +1302,24 @@ window.addEventListener('beforeunload', function (e) {
     contaFatti.innerHTML = nContaFatti;
     
     salvaPartita();
-    	
-		var color1=generateRandomColor();
-		var color2=generateRandomColor();
+    
+    if(rGame == 'HOT'){
+			var color1=generateRandomColorRed();
+			var color2=generateRandomColorRed();
+			$("#cat-azione-Sel").removeClass("horror");
+			$("#azione-Sel").removeClass("horror");
+		}else if (rGame == 'HORROR'){
+			var color1=generateRandomColorBlack();
+			var color2=generateRandomColorBlack();
+			$("#cat-azione-Sel").addClass("horror");
+			$("#azione-Sel").addClass("horror");
+		}else{
+			var color1=generateRandomColor();
+			var color2=generateRandomColor();
+			$("#cat-azione-Sel").removeClass("horror");
+			$("#azione-Sel").removeClass("horror");
+		}
+
 		var newBgImage="linear-gradient(19deg, "+color1+" 0%, "+color2+" 100%)"
 		
     document.body.style.backgroundImage = newBgImage;
