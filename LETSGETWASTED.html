@@ -8,6 +8,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Bangers" rel="stylesheet">
 <link href="https://fonts.cdnfonts.com/css/face-your-fears" rel="stylesheet">
+<link href="https://fonts.cdnfonts.com/css/jack-frost" rel="stylesheet">
+
 </head>
 <style>
 
@@ -658,10 +660,18 @@ input:checked + label:after {
 	
   text-align: center;
   text-transform: uppercase;
-  font-weight: 550;
-  font-size: 55px;
+  font-weight: 450;
+  font-size: 45px;
   transform: translate(-50%, -50%);
 	z-index: 5;
+	
+	background-color: rgba(0, 0, 0, 0.8);
+	padding: 25px;
+	border-radius: 5px;
+	width: 90%;
+	display: none;
+	
+	font-family: 'Jack Frost', sans-serif;
 }
 
 
@@ -1164,6 +1174,7 @@ window.addEventListener('beforeunload', function (e) {
 		startCountdown();
 		
 		$('#resultDado').html('');
+		$('#resultDado').hide();
 		
 		const ckActions = document.getElementById('ck-actions');
 		const ckJenga = document.getElementById('ck-jenga');
@@ -2036,9 +2047,10 @@ function fermaAnimazioni() {
   function generateRandomD20() {
   	if($('#resultDado').html() !== ''){
   		$('#resultDado').html('');
+  		$('#resultDado').hide();
   	}else{
         $('#resultDado').html("GIOCATORE &nbsp;" + (Math.floor(Math.random() * 20) + 1) + "<BR>AVVERSARIO " + (Math.floor(Math.random() * 20) + 1));
-        console.log("generateRandomD20");
+        $('#resultDado').show();
     }
   }
   </script>
