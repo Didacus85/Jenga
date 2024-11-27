@@ -647,6 +647,22 @@ input:checked + label:after {
   }
 }
 
+.divDado{
+	position: fixed;
+  top: 30%;
+  left: 50%;
+  color: RED;
+	letter-spacing: 0.2rem;
+	word-spacing: 0.1rem;
+	
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 550;
+  font-size: 55px;
+  transform: translate(-50%, -50%);
+  
+  z-index: 1000;
+}
     
 </style>
 <body id="corpo" oncontextmenu="return false;">
@@ -786,8 +802,12 @@ input:checked + label:after {
     <button class="sideButton contornoNero" id="sideNome" onClick="shufflePlayer()">SHUFFLE NOME</button>
     <p></P>
     <button class="sideButton contornoNero" id="sideAudio">AUDIO ON OFF</button>
+    <p></P>
+    <button class="sideButton contornoNero" id="sideDado" onClick="generateRandomD20()">TIRA DADO</button>
 </div>
 
+    <div class="divDado contornoNeroStrong" id="resultDado"></div>
+    
 <script>
 
 const apiKey = 'AIzaSyAM3dcFBIVc8DCwYSrfVWj0uAAUc2Xqxdo';
@@ -1141,6 +1161,8 @@ window.addEventListener('beforeunload', function (e) {
 		}
 		
 		startCountdown();
+		
+		$('#resultDado').html('');
 		
 		const ckActions = document.getElementById('ck-actions');
 		const ckJenga = document.getElementById('ck-jenga');
@@ -2010,6 +2032,14 @@ function fermaAnimazioni() {
 	document.querySelectorAll(".starburst").forEach(stella => stella.remove());
 }
 
+  function generateRandomD20() {
+  	if($('#resultDado').html() !== ''){
+  		$('#resultDado').html('');
+  	}else{
+        $('#resultDado').html("GIOCATORE &nbsp;" + (Math.floor(Math.random() * 20) + 1) + "<BR>AVVERSARIO " + (Math.floor(Math.random() * 20) + 1));
+        console.log("generateRandomD20");
+    }
+  }
   </script>
   
 
